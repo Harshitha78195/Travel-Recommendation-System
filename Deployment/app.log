@@ -1,0 +1,98 @@
+2025-04-22 16:09:20,084 - app - INFO - Processing query: 'I want to go to Nairobi, Kenya. Suggest attractions like museums and parks'
+2025-04-22 16:09:20,084 - app - INFO - Processing query: 'I want to go to Nairobi, Kenya. Suggest attractions like museums and parks'
+2025-04-22 16:09:20,092 - app - INFO - Initializing recommender system
+2025-04-22 16:09:20,093 - app - INFO - Initializing recommender system
+2025-04-22 16:09:21,122 - app - INFO - Successfully loaded 14250 records
+2025-04-22 16:09:21,288 - app - INFO - Successfully loaded 14250 records
+2025-04-22 16:10:27,216 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-22 16:10:29,139 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-22 16:11:49,129 - app - INFO - Processing query: 'Looking for hotels in Maun with pool and internet. Price should be affordable'
+2025-04-22 16:11:49,130 - app - INFO - Processing query: 'Looking for hotels in Maun with pool and internet. Price should be affordable'
+2025-04-22 16:11:49,130 - app - INFO - Initializing recommender system
+2025-04-22 16:11:49,130 - app - INFO - Initializing recommender system
+2025-04-22 16:11:50,065 - app - INFO - Successfully loaded 14250 records
+2025-04-22 16:11:50,171 - app - INFO - Successfully loaded 14250 records
+2025-04-22 16:13:48,134 - app - INFO - Found 0 attractions and 5 hotels
+2025-04-22 16:13:48,440 - app - INFO - Found 0 attractions and 5 hotels
+2025-04-22 16:15:08,031 - app - INFO - Processing query: 'i want to go to botswana, suggest some attractions'
+2025-04-22 16:15:08,032 - app - INFO - Initializing recommender system
+2025-04-22 16:15:08,035 - app - INFO - Processing query: 'i want to go to botswana, suggest some attractions'
+2025-04-22 16:15:08,039 - app - INFO - Initializing recommender system
+2025-04-22 16:15:08,783 - app - INFO - Successfully loaded 14250 records
+2025-04-22 16:15:09,667 - app - INFO - Successfully loaded 14250 records
+2025-04-22 16:15:46,055 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-22 16:15:46,540 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 02:20:52,463 - app - INFO - Cleaning up resources...
+2025-04-23 02:20:52,489 - app - INFO - MongoDB connection closed
+2025-04-23 02:20:52,503 - app - INFO - Cleaning up resources...
+2025-04-23 02:20:52,503 - app - INFO - MongoDB connection closed
+2025-04-23 13:37:07,949 - app - INFO - Successfully connected to MongoDB
+2025-04-23 13:37:07,999 - app - INFO - Successfully accessed collection: africa_data_with_sentiment
+2025-04-23 13:37:08,003 - app - INFO - Starting Flask application
+2025-04-23 13:38:35,361 - app - INFO - Processing query: 'Looking for hotels in Maun with pool and internet. Price should be affordable'
+2025-04-23 13:38:35,362 - app - INFO - Processing query: 'Looking for hotels in Maun with pool and internet. Price should be affordable'
+2025-04-23 13:38:35,363 - app - INFO - Initializing recommender system
+2025-04-23 13:38:35,363 - app - INFO - Initializing recommender system
+2025-04-23 13:38:36,351 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:38:36,701 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:40:12,276 - app - INFO - Processing query: 'i want to go to ghana, botswana, suggest some attractions Sights & Landmarks'
+2025-04-23 13:40:12,322 - app - INFO - Processing query: 'i want to go to ghana, botswana, suggest some attractions Sights & Landmarks'
+2025-04-23 13:40:12,382 - app - INFO - Initializing recommender system
+2025-04-23 13:40:12,414 - app - INFO - Initializing recommender system
+2025-04-23 13:40:17,731 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:40:18,381 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:41:45,864 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:41:47,235 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:41:59,469 - app - INFO - Found 0 attractions and 5 hotels
+2025-04-23 13:42:01,851 - app - INFO - Found 0 attractions and 5 hotels
+2025-04-23 13:47:56,401 - app - INFO - Processing query: 'i want to go to botswana, suggest some attractions like nature & parks'
+2025-04-23 13:47:56,403 - app - INFO - Initializing recommender system
+2025-04-23 13:47:56,405 - app - INFO - Processing query: 'i want to go to botswana, suggest some attractions like nature & parks'
+2025-04-23 13:47:56,407 - app - INFO - Initializing recommender system
+2025-04-23 13:47:58,037 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:47:58,121 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:48:43,136 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:48:43,770 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:49:25,458 - app - INFO - Processing query: 'Recommend top attractions in Cairo, Egypt.'
+2025-04-23 13:49:25,459 - app - INFO - Processing query: 'Recommend top attractions in Cairo, Egypt.'
+2025-04-23 13:49:25,460 - app - INFO - Initializing recommender system
+2025-04-23 13:49:25,460 - app - INFO - Initializing recommender system
+2025-04-23 13:49:26,314 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:49:26,416 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:51:29,871 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:51:30,997 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:53:33,651 - app - INFO - Processing query: 'Recommend attractions in Cairo, Egypt like Sights & Landmarks'
+2025-04-23 13:53:33,652 - app - INFO - Initializing recommender system
+2025-04-23 13:53:33,655 - app - INFO - Processing query: 'Recommend attractions in Cairo, Egypt like Sights & Landmarks'
+2025-04-23 13:53:33,657 - app - INFO - Initializing recommender system
+2025-04-23 13:53:34,524 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:53:34,661 - app - INFO - Successfully loaded 14250 records
+2025-04-23 13:54:15,142 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-23 13:54:15,771 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-24 11:57:14,732 - app - INFO - Successfully connected to MongoDB
+2025-04-24 11:57:14,799 - app - INFO - Successfully accessed collection: africa_data_with_sentiment
+2025-04-24 11:57:14,804 - app - INFO - Starting Flask application
+2025-04-24 20:23:14,086 - app - INFO - Processing query: 'i want to go to Cairo, Egypt suggest some attractions'
+2025-04-24 20:23:14,093 - app - INFO - Processing query: 'i want to go to Cairo, Egypt suggest some attractions'
+2025-04-24 20:23:14,098 - app - INFO - Initializing recommender system
+2025-04-24 20:23:14,098 - app - INFO - Initializing recommender system
+2025-04-24 20:23:15,835 - app - INFO - Successfully loaded 14250 records
+2025-04-24 20:23:15,836 - app - INFO - Successfully loaded 14250 records
+2025-04-24 20:23:35,714 - app - INFO - Processing query: 'Looking for hotels in Cape Town with pool and wifi. Price should be affordable'
+2025-04-24 20:23:35,715 - app - INFO - Initializing recommender system
+2025-04-24 20:23:35,717 - app - INFO - Processing query: 'Looking for hotels in Cape Town with pool and wifi. Price should be affordable'
+2025-04-24 20:23:35,719 - app - INFO - Initializing recommender system
+2025-04-24 20:23:37,731 - app - INFO - Successfully loaded 14250 records
+2025-04-24 20:23:38,915 - app - INFO - Successfully loaded 14250 records
+2025-04-24 20:24:25,710 - app - INFO - Found 0 attractions and 2 hotels
+2025-04-24 20:24:25,689 - app - INFO - Found 0 attractions and 2 hotels
+2025-04-24 20:25:01,323 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-24 20:25:03,129 - app - INFO - Found 5 attractions and 0 hotels
+2025-04-24 20:26:49,213 - app - INFO - Processing query: 'Looking for hotels in Muan with pool and wifi. Price should be affordable'
+2025-04-24 20:26:49,214 - app - INFO - Initializing recommender system
+2025-04-24 20:26:49,217 - app - INFO - Processing query: 'Looking for hotels in Muan with pool and wifi. Price should be affordable'
+2025-04-24 20:26:49,218 - app - INFO - Initializing recommender system
+2025-04-24 20:26:50,308 - app - INFO - Successfully loaded 14250 records
+2025-04-24 20:26:50,367 - app - INFO - Successfully loaded 14250 records
+2025-04-24 20:27:12,913 - app - INFO - Found 0 attractions and 2 hotels
+2025-04-24 20:27:13,972 - app - INFO - Found 0 attractions and 2 hotels

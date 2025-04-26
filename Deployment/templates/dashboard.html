@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Your Travel Dashboard</h1>
+    
+    <div class="dashboard-sections">
+        <!-- Recent Searches Section -->
+        <section class="dashboard-section">
+            <h2>Recent Searches</h2>
+            <div id="recent-searches" class="card-container">
+                <!-- Dynamically populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Recommended For You Section -->
+        <section class="dashboard-section">
+            <h2>Recommended For You</h2>
+            <div id="personalized-recommendations" class="card-container">
+                <!-- Dynamically populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Travel Statistics Section -->
+        <section class="dashboard-section">
+            <h2>Your Travel Stats</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Countries Visited</h3>
+                    <p id="countries-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Cities Explored</h3>
+                    <p id="cities-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Attractions Rated</h3>
+                    <p id="attractions-count">0</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

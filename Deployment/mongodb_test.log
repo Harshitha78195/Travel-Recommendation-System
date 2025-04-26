@@ -1,0 +1,16 @@
+2025-04-17 00:03:55,797 - INFO - ==================================================
+2025-04-17 00:03:55,798 - INFO - Starting MongoDB connection test at 2025-04-17 00:03:55.798463
+2025-04-17 00:03:55,798 - INFO - Connecting to: mongodb://localhost:27017/
+2025-04-17 00:03:55,799 - INFO - Database: Travel_Recommendation
+2025-04-17 00:03:55,799 - INFO - Collection: africa_data_with_sentiment
+2025-04-17 00:03:56,741 - INFO - Sample document keys: ['_id', 'id', 'type', 'subcategories', 'name', 'description', 'rating', 'latitude', 'longitude', 'numberOfReviews', 'amenities', 'LowerPrice', 'UpperPrice', 'Rank', 'Total', 'Location', 'RankingType', 'country', 'city', 'regional_rating', 'image', 'webUrl', 'amenities_cleaned', 'combined_features', 'description_clean', 'avg_sentiment_score', 'avg_review_rating']
+2025-04-17 00:03:56,749 - INFO - ==================================================
+2025-04-17 00:06:14,465 - INFO - ==================================================
+2025-04-17 00:06:14,465 - INFO - Starting MongoDB connection test
+2025-04-17 00:06:14,485 - INFO - [OK] Connected to MongoDB server
+2025-04-17 00:06:14,486 - INFO - [OK] Database 'Travel_Recommendation' exists
+2025-04-17 00:06:14,487 - INFO - [OK] Collection 'africa_data_with_sentiment' exists
+2025-04-17 00:06:14,498 - INFO - [OK] Found 14250 documents
+2025-04-17 00:06:14,500 - INFO - Sample document fields: ['_id', 'id', 'type', 'subcategories', 'name', 'description', 'rating', 'latitude', 'longitude', 'numberOfReviews', 'amenities', 'LowerPrice', 'UpperPrice', 'Rank', 'Total', 'Location', 'RankingType', 'country', 'city', 'regional_rating', 'image', 'webUrl', 'amenities_cleaned', 'combined_features', 'description_clean', 'avg_sentiment_score', 'avg_review_rating']
+2025-04-17 00:06:14,501 - INFO - [OK] All required fields present
+2025-04-17 00:06:14,502 - INFO - ==================================================

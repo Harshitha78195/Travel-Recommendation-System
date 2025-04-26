@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block title %}Travel Recommendations for "{{ query }}"{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="mb-4">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Search
+            </a>
+        </div>
+        
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">
+                    <i class="fas fa-map-marked-alt me-2"></i>
+                    Recommendations for: "{{ query }}"
+                </h2>
+            </div>
+            <div class="card-body">
+                
+                
+                <!-- Attractions Section -->
+                {% if attractions %}
+                <div class="mb-5">
+                    <h3 class="mb-4 border-bottom pb-2">
+                        <i class="fas fa-landmark text-primary me-2"></i>
+                        Top Attractions
+                    </h3>
+                    <div class="row">
+                        {% for attraction in attractions %}
+                        <div class="col-lg-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ attraction.name }}</h4>
+                                    {% if attraction.subcategories %}
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        <i class="fas fa-tag me-1"></i>{{ attraction.subcategories }}
+                                    </h6>
+                                    {% endif %}
+                                    
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="rating-stars me-2">
+                                            {% for i in range(5) %}
+                                            <i class="fas fa-star{% if i >= attraction.rating|int %} text-muted{% else %} text-warning{% endif %}"></i>
+                                            {% endfor %}
+                                        </div>
+                                        <span class="text-muted">
+                                            {{ attraction.rating }}/5 ({{ attraction.numberOfReviews }} reviews)
+                                        </span>
+                                    </div>
+                                    
+                                    <p class="card-text">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        {{ attraction.city }}, {{ attraction.country }}
+                                    </p>
+                                    
+                                    <div class="card-text description mb-3">
+                                        {% if attraction.description %}
+                                        {{ attraction.description|truncate(200) }}
+                                        {% if attraction.description|length > 200 %}
+                                        <a href="#" class="read-more" data-fulltext="{{ attraction.description }}">Read more</a>
+                                        {% endif %}
+                                        {% else %}
+                                        <span class="text-muted">No description available</span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    {% if attraction.webUrl %}
+                                    <a href="{{ attraction.webUrl }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-external-link-alt me-1"></i>Visit Website
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Hotels Section -->
+                {% if hotels %}
+                <div class="mt-5">
+                    <h3 class="mb-4 border-bottom pb-2">
+                        <i class="fas fa-hotel text-success me-2"></i>
+                        Recommended Hotels
+                    </h3>
+                    <div class="row">
+                        {% for hotel in hotels %}
+                        <div class="col-lg-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ hotel.name }}</h4>
+                                    {% if hotel.subcategories %}
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        <i class="fas fa-tag me-1"></i>{{ hotel.subcategories }}
+                                    </h6>
+                                    {% endif %}
+                                    
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="rating-stars me-2">
+                                            {% for i in range(5) %}
+                                            <i class="fas fa-star{% if i >= hotel.rating|int %} text-muted{% else %} text-warning{% endif %}"></i>
+                                            {% endfor %}
+                                        </div>
+                                        <span class="text-muted">
+                                            {{ hotel.rating }}/5 ({{ hotel.numberOfReviews }} reviews)
+                                        </span>
+                                    </div>
+                                    
+                                    <p class="card-text">
+                                        <i class="fas fa-tag me-1"></i>
+                                        {% if hotel.LowerPrice and hotel.UpperPrice %}
+                                        ${{ hotel.LowerPrice }} - ${{ hotel.UpperPrice }}
+                                        {% else %}
+                                        Price not available
+                                        {% endif %}
+                                    </p>
+                                    
+                                    <p class="card-text">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        {{ hotel.city }}, {{ hotel.country }}
+                                    </p>
+                                    
+                                    {% if hotel.amenities_formatted %}
+                                    <p class="card-text">
+                                        <i class="fas fa-list me-1"></i>
+                                        {{ hotel.amenities_formatted }}
+                                    </p>
+                                    {% endif %}
+                                    
+                                    <div class="card-text description mb-3">
+                                        {% if hotel.description %}
+                                        {{ hotel.description|truncate(200) }}
+                                        {% if hotel.description|length > 200 %}
+                                        <a href="#" class="read-more" data-fulltext="{{ hotel.description }}">Read more</a>
+                                        {% endif %}
+                                        {% else %}
+                                        <span class="text-muted">No description available</span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    {% if hotel.webUrl %}
+                                    <a href="{{ hotel.webUrl }}" target="_blank" class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-external-link-alt me-1"></i>Visit Website
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // Read more/less functionality
+        $(document).on('click', '.read-more', function(e) {
+            e.preventDefault();
+            const fullText = $(this).data('fulltext');
+            const container = $(this).parent();
+            container.html(fullText + ' <a href="#" class="read-less">Read less</a>');
+        });
+
+        $(document).on('click', '.read-less', function(e) {
+            e.preventDefault();
+            const container = $(this).parent();
+            const truncatedText = container.text().substring(0, 200) + '...';
+            container.html(truncatedText + ' <a href="#" class="read-more" data-fulltext="' + $(this).data('fulltext') + '">Read more</a>');
+        });
+    });
+</script>
+
+<style>
+    .query-analysis {
+        background: #f8f9fa;
+        border-left: 4px solid #0d6efd;
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .query-analysis h3 {
+        color: #0d6efd;
+        font-size: 1.25rem;
+    }
+    
+    .analysis-content {
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    
+    .analysis-content pre {
+        margin: 0;
+        font-family: inherit;
+    }
+</style>
+{% endblock %}

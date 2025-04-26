@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="search-container">
+    <h1>Advanced Travel Search</h1>
+    
+    <form id="advanced-search-form">
+        <div class="search-options">
+            <!-- Location Input with GPS Toggle -->
+            <div class="form-group">
+                <label for="location">Location</label>
+                <div class="location-input-group">
+                    <input type="text" id="location" name="location" placeholder="City or Country">
+                    <button type="button" id="use-gps" class="gps-btn">
+                        <i class="fas fa-location-arrow"></i> Use My Location
+                    </button>
+                </div>
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+            </div>
+
+            <!-- Type Selection -->
+            <div class="form-group">
+                <label for="type">Place Type</label>
+                <select id="type" name="type">
+                    <option value="">Any Type</option>
+                    <option value="attraction">Attractions</option>
+                    <option value="hotel">Hotels</option>
+                </select>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="form-group range-group">
+                <label for="rating">Minimum Rating</label>
+                <input type="range" id="rating" name="rating" min="1" max="5" step="0.5" value="3">
+                <span id="rating-value">3</span> ⭐
+            </div>
+
+            <!-- Price Range -->
+            <div class="form-group">
+                <label>Price Range</label>
+                <div class="price-range">
+                    <input type="number" id="min-price" name="min_price" placeholder="Min" min="0">
+                    <span>to</span>
+                    <input type="number" id="max-price" name="max_price" placeholder="Max" min="0">
+                </div>
+            </div>
+
+            <!-- Amenities -->
+            <div class="form-group">
+                <label>Amenities</label>
+                <div class="amenities-grid">
+                    {% for amenity in common_amenities %}
+                    <div class="amenity-option">
+                        <input type="checkbox" id="amenity-{{ loop.index }}" name="amenities" value="{{ amenity }}">
+                        <label for="amenity-{{ loop.index }}">{{ amenity }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <div id="search-results" class="results-container">
+        <!-- Results will be loaded here via AJAX -->
+    </div>
+</div>
+{% endblock %}

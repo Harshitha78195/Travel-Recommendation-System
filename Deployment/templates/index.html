@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% block title %}Travel Recommender - Find Your Perfect Destination{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">
+                    <i class="fas fa-compass me-2"></i>Travel Recommendation System
+                </h1>
+                
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5><i class="fas fa-lightbulb text-warning me-2"></i>How to Use:</h5>
+                                <p>Ask for recommendations in natural language, such as:</p>
+                                <ul>
+                                    <li>"I want to go to Nairobi, Kenya. Suggest attractions like museums and parks."</li>
+                                    <li>"Looking for hotels in Cape Town with pool and wifi. Price should be affordable."</li>
+                                    <li>"Recommend top attractions in Cairo, Egypt."</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Primary Recommendation Form -->
+                <form id="recommendation-form">
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" id="query" name="query" class="form-control form-control-lg" 
+                                   placeholder="Enter your travel query..." required>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Get Recommendations
+                            </button>
+                        </div>
+                        <div class="form-text text-muted mt-1">Example: "Find luxury hotels in Paris with spa and gym"</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Loading Spinner -->
+        <div id="loading" class="text-center mt-4 d-none">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Finding the best recommendations for you...</p>
+        </div>
+        
+        <!-- Error Container -->
+        <div id="error-container" class="alert alert-danger mt-4 d-none">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <span id="error-message"></span>
+        </div>
+        
+        <!-- Results Container -->
+        <div id="results-container" class="mt-4"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // Form submission
+        $('#recommendation-form').submit(function(e) {
+            e.preventDefault();
+            
+            // Clear previous results and errors
+            $('#results-container').html('');
+            $('#error-container').addClass('d-none');
+            
+            // Validate input
+            const query = $('#query').val().trim();
+            if (!query) {
+                showError('Please enter a travel request');
+                return;
+            }
+            
+            // Show loading spinner
+            $('#loading').removeClass('d-none');
+            
+            // AJAX request
+            $.ajax({
+                url: "{{ url_for('recommend') }}",
+                type: 'POST',
+                data: {
+                    query: query,
+                    top_n: 5
+                },
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    // Hide loading spinner
+                    $('#loading').addClass('d-none');
+                    
+                    if (response.error) {
+                        showError(response.error);
+                        return;
+                    }
+                    
+                    if (response.attractions && response.attractions.length === 0 && response.hotels && response.hotels.length === 0) {
+                        $('#results-container').html(`
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                No recommendations found for "${response.query}". Try a different search.
+                            </div>
+                        `);
+                        return;
+                    }
+                    
+                    // Render results
+                    renderResults(response);
+                },
+                error: function(xhr) {
+                    $('#loading').addClass('d-none');
+                    showError(xhr.responseJSON?.error || 'An error occurred. Please try again.');
+                }
+            });
+        });
+        
+        function showError(message) {
+            $('#error-message').text(message);
+            $('#error-container').removeClass('d-none');
+        }
+        
+        function formatAmenities(amenities) {
+            if (!amenities || amenities.length === 0) {
+                return '<span class="text-muted">No amenities listed</span>';
+            }
+            
+            let html = '';
+            amenities.forEach(amenity => {
+                if (amenity && amenity.trim()) {
+                    html += `<span class="badge bg-light text-dark me-1 mb-1">${amenity}</span>`;
+                }
+            });
+            
+            return html || '<span class="text-muted">No amenities listed</span>';
+        }
+        
+        function renderResults(response) {
+            let resultsHtml = `
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">
+                            <i class="fas fa-map-marked-alt me-2"></i>
+                            Recommendations for: "${response.query}"
+                        </h2>
+                    </div>
+                    <div class="card-body">
+            `;
+            
+            // Attractions Section
+            if (response.attractions && response.attractions.length > 0) {
+                resultsHtml += `
+                    <h3 class="mt-3 mb-3">
+                        <i class="fas fa-landmark text-primary me-2"></i>
+                        Top Attractions
+                    </h3>
+                    <div class="row">
+                `;
+                
+                response.attractions.forEach(attraction => {
+                    resultsHtml += `
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                ${attraction.image ? `
+                                <img src="${attraction.image}" class="card-img-top" alt="${attraction.name}" 
+                                     onerror="this.onerror=null;this.src='/static/img/placeholder.jpg';">
+                                ` : ''}
+                                <div class="card-body">
+                                    <h4 class="card-title">${attraction.name || 'Unnamed Attraction'}</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">${attraction.subcategories || ''}</h6>
+                                    <div class="mb-2">
+                                        ${attraction.rating_stars || ''} ${attraction.rating || 0}/5
+                                        <small class="text-muted ms-2">(${attraction.numberOfReviews || 0} reviews)</small>
+                                    </div>
+                                    <p class="card-text">
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        ${attraction.city || ''}, ${attraction.country || ''}
+                                        ${attraction.distance ? `
+                                        <span class="badge bg-info ms-2">${attraction.distance.toFixed(1)} km away</span>
+                                        ` : ''}
+                                    </p>
+                                    <p class="card-text description">
+                                        ${attraction.description || 'No description available'}
+                                    </p>
+                                    ${attraction.webUrl ? `
+                                    <a href="${attraction.webUrl}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-external-link-alt me-1"></i> Visit Website
+                                    </a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                resultsHtml += `</div>`; // Close attractions row
+            }
+            
+            // Hotels Section
+            if (response.hotels && response.hotels.length > 0) {
+                resultsHtml += `
+                    <h3 class="mt-5 mb-3">
+                        <i class="fas fa-hotel text-success me-2"></i>
+                        Recommended Hotels
+                    </h3>
+                    <div class="row">
+                `;
+                
+                response.hotels.forEach(hotel => {
+                    resultsHtml += `
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                ${hotel.image ? `
+                                <img src="${hotel.image}" class="card-img-top" alt="${hotel.name}" 
+                                     onerror="this.onerror=null;this.src='/static/img/placeholder.jpg';">
+                                ` : ''}
+                                <div class="card-body">
+                                    <h4 class="card-title">${hotel.name || 'Unnamed Hotel'}</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">${hotel.subcategories || ''}</h6>
+                                    <div class="mb-2">
+                                        ${hotel.rating_stars || ''} ${hotel.rating || 0}/5
+                                        <small class="text-muted ms-2">(${hotel.numberOfReviews || 0} reviews)</small>
+                                    </div>
+                                    <p class="card-text">
+                                        <i class="fas fa-tag me-2"></i>
+                                        $${hotel.LowerPrice || 'N/A'} - $${hotel.UpperPrice || 'N/A'}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        ${hotel.city || ''}, ${hotel.country || ''}
+                                        ${hotel.distance ? `
+                                        <span class="badge bg-info ms-2">${hotel.distance.toFixed(1)} km away</span>
+                                        ` : ''}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fas fa-list me-2 text-success"></i>
+                                        <strong>Amenities:</strong>
+                                    </p>
+                                    <p class="card-text amenities-list">
+                                        ${formatAmenities(hotel.amenities_cleaned)}
+                                    </p>
+                                    ${hotel.webUrl ? `
+                                    <a href="${hotel.webUrl}" target="_blank" class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-external-link-alt me-1"></i> Visit Website
+                                    </a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                resultsHtml += `</div>`; // Close hotels row
+            }
+            
+            resultsHtml += `</div></div>`; // Close card-body and card
+            $('#results-container').html(resultsHtml);
+        }
+    });
+</script>
+{% endblock %}
